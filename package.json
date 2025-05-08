@@ -1,0 +1,19 @@
+{
+  "name": "internship-assignement",
+  "version": "1.0.0",
+  "description": "Mini E-commerce site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ankur Jha",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.14.1",
+    "multer": "^1.4.5-lts.2",
+    "node": "^24.0.0",
+    "zod": "^3.24.4"
+  }
+}
