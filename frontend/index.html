@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopEase - Your Online Store</title>
+    <link rel="stylesheet" href="/frontend/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <div class="logo">ShopEase</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="#add-product">Add Product</a></li>
+        </ul>
+      </nav>
+      <div class="search-cart">
+        <form class="search-form">
+          <input type="text" class="search-input" placeholder="Search products...">
+          <button type="submit" class="search-button">Search</button>
+        </form>
+        <div class="cart-icon">
+          🛒
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Find Your Perfect Products</h1>
+      <p>Shop the latest trends and discover amazing deals on the best products from around the world.</p>
+      <a href="#" class="cta-button">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories">
+    <div class="container">
+      <h2 class="section-title">Shop by Category</h2>
+      <div class="category-grid">
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=2583&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Electronics" class="category-image">
+          <div class="category-name">Electronics</div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1618483117619-7baef2anexion0db1f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fashion" class="category-image">
+          <div class="category-name">Fashion</div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Home & Garden" class="category-image">
+          <div class="category-name">Home & Garden</div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1540491688060-aa710a9f9d33?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sports" class="category-image">
+          <div class="category-name">Sports</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products">
+    <div class="container">
+      <h2 class="section-title">Featured Products</h2>
+      <div class="product-controls">
+        <div class="product-filters">
+          <select name="sort">
+            <option value="popular">Sort by: Popularity</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="newest">Newest First</option>
+          </select>
+        </div>
+        <div class="view-options">
+          <button class="active">Grid</button>
+          <button>List</button>
+        </div>
+      </div>
+      <div class="product-grid">
+        <!-- Product 1 -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Wireless Headphones" class="product-image">
+            <div class="product-badge">New</div>
+          </div>
+          <div class="product-details">
+            <h3 class="product-title">Premium Wireless Headphones</h3>
+            <div class="product-price">$129.99</div>
+            <p class="product-description">High-quality wireless headphones with noise cancellation and long battery life.</p>
+            <div class="product-actions">
+              <a href="#" class="add-to-cart">Add to Cart</a>
+              <button class="wishlist-button">❤</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product 2 -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=2799&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Smart Watch" class="product-image">
+          </div>
+          <div class="product-details">
+            <h3 class="product-title">Smart Watch Pro</h3>
+            <div class="product-price">$199.99</div>
+            <p class="product-description">Feature-packed smartwatch with health monitoring and notifications.</p>
+            <div class="product-actions">
+              <a href="#" class="add-to-cart">Add to Cart</a>
+              <button class="wishlist-button">❤</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product 3 -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=2480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Running Shoes" class="product-image">
+            <div class="product-badge">Sale</div>
+          </div>
+          <div class="product-details">
+            <h3 class="product-title">Athletic Running Shoes</h3>
+            <div class="product-price">$89.99</div>
+            <p class="product-description">Comfortable and durable shoes perfect for running and training.</p>
+            <div class="product-actions">
+              <a href="#" class="add-to-cart">Add to Cart</a>
+              <button class="wishlist-button">❤</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product 4 -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Leather Bag" class="product-image">
+          </div>
+          <div class="product-details">
+            <h3 class="product-title">Designer Leather Bag</h3>
+            <div class="product-price">$149.99</div>
+            <p class="product-description">Stylish leather bag with multiple compartments and premium finish.</p>
+            <div class="product-actions">
+              <a href="#" class="add-to-cart">Add to Cart</a>
+              <button class="wishlist-button">❤</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add Product Section -->
+  <section class="add-product-section" id="add-product">
+    <div class="container">
+      <h2 class="section-title">Add New Product</h2>
+      <form class="add-product-form">
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input type="text" id="productName" class="form-control" placeholder="Enter product name">
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="productPrice">Price ($)</label>
+            <input type="number" id="productPrice" class="form-control" placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label for="productCategory">Category</label>
+            <select id="productCategory" class="form-control">
+              <option value="">Select Category</option>
+              <option value="electronics">Electronics</option>
+              <option value="fashion">Fashion</option>
+              <option value="home">Home & Garden</option>
+              <option value="sports">Sports</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="productDescription">Description</label>
+          <textarea id="productDescription" class="form-control" placeholder="Describe your product..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>Product Image</label>
+          <div class="image-upload">
+            <div class="image-upload-icon">📸</div>
+            <input type="file" id="img" name="img" accept="image/*">
+            <p class="text-muted">JPG, PNG or GIF, Max size 2MB</p>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="productQuantity">Quantity</label>
+            <input type="number" id="productQuantity" class="form-control" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label for="productStatus">Status</label>
+            <select id="productStatus" class="form-control">
+              <option value="in-stock">In Stock</option>
+              <option value="out-of-stock">Out of Stock</option>
+              <option value="coming-soon">Coming Soon</option>
+            </select>
+          </div>
+        </div>
+        
+        <button type="submit" class="submit-button">Add Product</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-column">
+        <h3>ShopEase</h3>
+        <p>Your one-stop shop for all your needs. Discover amazing products at competitive prices.</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Twitter">t</a>
+          <a href="#" aria-label="Instagram">i</a>
+          <a href="#" aria-label="YouTube">y</a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="#add-product">Add Product</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Customer Service</h3>
+        <ul class="footer-links">
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Newsletter</h3>
+        <p>Subscribe to our newsletter to get updates on new products and special offers.</p>
+        <form class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Your email address">
+          <button type="submit" class="newsletter-button">→</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom">
+      <p>&copy; 2025 ShopEase. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
