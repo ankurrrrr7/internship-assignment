@@ -62,7 +62,7 @@ app.get('/products', async (req, res) => {
     }
 });
 
-// Keep original /search endpoint with fixed logic
+
 app.get('/search', async (req, res) => {
     const searched = req.query.q;
     
