@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShopEase - Your Online Store</title>
-    <link rel="stylesheet" href="/frontend/styles.css">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <!-- Header -->
@@ -87,71 +88,10 @@
       <div class="product-grid">
         <!-- Product 1 -->
         <div class="product-card">
-          <div class="product-image-container">
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Wireless Headphones" class="product-image">
-            <div class="product-badge">New</div>
-          </div>
-          <div class="product-details">
-            <h3 class="product-title">Premium Wireless Headphones</h3>
-            <div class="product-price">$129.99</div>
-            <p class="product-description">High-quality wireless headphones with noise cancellation and long battery life.</p>
-            <div class="product-actions">
-              <a href="#" class="add-to-cart">Add to Cart</a>
-              <button class="wishlist-button">❤</button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 2 -->
-        <div class="product-card">
-          <div class="product-image-container">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=2799&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Smart Watch" class="product-image">
-          </div>
-          <div class="product-details">
-            <h3 class="product-title">Smart Watch Pro</h3>
-            <div class="product-price">$199.99</div>
-            <p class="product-description">Feature-packed smartwatch with health monitoring and notifications.</p>
-            <div class="product-actions">
-              <a href="#" class="add-to-cart">Add to Cart</a>
-              <button class="wishlist-button">❤</button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 3 -->
-        <div class="product-card">
-          <div class="product-image-container">
-            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=2480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Running Shoes" class="product-image">
-            <div class="product-badge">Sale</div>
-          </div>
-          <div class="product-details">
-            <h3 class="product-title">Athletic Running Shoes</h3>
-            <div class="product-price">$89.99</div>
-            <p class="product-description">Comfortable and durable shoes perfect for running and training.</p>
-            <div class="product-actions">
-              <a href="#" class="add-to-cart">Add to Cart</a>
-              <button class="wishlist-button">❤</button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 4 -->
-        <div class="product-card">
-          <div class="product-image-container">
-            <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Leather Bag" class="product-image">
-          </div>
-          <div class="product-details">
-            <h3 class="product-title">Designer Leather Bag</h3>
-            <div class="product-price">$149.99</div>
-            <p class="product-description">Stylish leather bag with multiple compartments and premium finish.</p>
-            <div class="product-actions">
-              <a href="#" class="add-to-cart">Add to Cart</a>
-              <button class="wishlist-button">❤</button>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
+     </div>
+   
   </section>
 
   <!-- Add Product Section -->
@@ -264,5 +204,85 @@
       <p>&copy; 2025 ShopEase. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+    document.querySelector('.add-product-form').addEventListener('submit', sendData);
+      function sendData(e) {
+      e.preventDefault(); 
+  const formData = new FormData();
+  formData.append('productname', document.getElementById('productName').value);
+  formData.append('price', document.getElementById('productPrice').value);
+  formData.append('category', document.getElementById('productCategory').value);
+  formData.append('description', document.getElementById('productDescription').value);
+  formData.append('quantity', document.getElementById('productQuantity').value);
+  formData.append('status', document.getElementById('productStatus').value);
+  formData.append('image', document.getElementById('img').files[0]);
+
+  axios.post('http://localhost:3000/addproduct', formData)
+    .then(response => alert('New product added!'))
+    .catch(error => console.error(error));
+}
+
+function addProductToDOM(product) {
+  console.log("Adding product:", product); // Debug log to see what data we're receiving
+  
+  const container = document.querySelector(".product-grid"); 
+  const div = document.createElement('div');
+  div.className = "product-card";
+  
+  // Check if product and image data exist
+  if (!product || !product.image || !product.image.data) {
+    console.error("Invalid product data:", product);
+    div.innerHTML = `
+      <div class="product-image-container">
+        <div class="image-placeholder">No Image Available</div>
+      </div>
+      <div class="product-details">
+        <h3 class="product-title">${product.productname || 'Unknown Product'}</h3>
+        <div class="product-price">$${product.price || '0.00'}</div>
+        <p class="product-description">${product.description || 'No description available'}</p>
+        <div class="product-actions">
+          <a href="#" class="add-to-cart">Add to Cart</a>
+          <button class="wishlist-button">❤</button>
+        </div>
+      </div>
+    `;
+  } else {
+    div.innerHTML = `
+      <div class="product-image-container">
+        <img src="data:${product.type};base64:${product.data}" class="product-image"/>
+      </div>
+      <div class="product-details">
+        <h3 class="product-title">${product.productname}</h3>
+        <div class="product-price">$${product.price}</div>
+        <p class="product-description">${product.description}</p>
+        <div class="product-actions">
+          <a href="#" class="add-to-cart">Add to Cart</a>
+          <button class="wishlist-button">❤</button>
+        </div>
+      </div>
+    `;
+  }
+  
+  container.appendChild(div);
+}
+
+window.onload = async () => {
+  try {
+    console.log("Fetching products...");
+    const res = await axios.get('http://localhost:3000/product');
+    console.log("Products received:", res.data);
+    
+    if (res.data && res.data.length > 0) {
+      res.data.forEach(addProductToDOM);
+    } else {
+      console.log("No products found");
+      document.querySelector(".product-grid").innerHTML = '<p>No products available</p>';
+    }
+  } catch (err) {
+    console.error("Failed to load products:", err);
+    document.querySelector(".product-grid").innerHTML = '<p>Failed to load products. Please try again later.</p>';
+  }
+};
+  </script>
 </body>
 </html>
