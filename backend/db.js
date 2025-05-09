@@ -15,16 +15,7 @@ const addProductSchema = new mongoose.Schema({
     description : {type:String, required: true},
     quantity: {type: Number, required: true},
     status: {type: String, required: true},
-    image: {
-        data: {
-          type: Buffer,
-          required: true
-        },
-        type: {
-          type: String,
-          required: true
-        }
-    }
+    image: {type: String, required:true}
 })
 
 const addProduct = mongoose.model('AddProduct', addProductSchema)

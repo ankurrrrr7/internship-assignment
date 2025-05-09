@@ -4,22 +4,19 @@ const { addProduct } = require('./db')
 const app = express()
 const path = require('path');
 
-//File storing middleware base64
-const multer = require('multer')
-const storage = multer.memoryStorage();
-const upload = multer({storage:storage})
-
 app.use(express.json())
 app.use(express.static(path.join(__dirname, '../frontend')));
-app.post('/addproduct',upload.single('image'),async (req, res)=>{
-    const parsed = checkAddProduct.safeParse(req.body);
 
+app.post('/addproduct', async (req, res) => {
+    const parsed = checkAddProduct.safeParse(req.body);
+    
     if(!parsed.success){
         return res.status(400).json({
-            msg:"Invalid Inputs!!",
+            msg: "Invalid Inputs!!",
             errors: parsed.error.errors
         })
     }
+    
     try{
         const newProduct = new addProduct({
             productname: req.body.productname,
@@ -28,28 +25,70 @@ app.post('/addproduct',upload.single('image'),async (req, res)=>{
             description: req.body.description,
             quantity: req.body.quantity,
             status: req.body.status,
-            image:{
-                data:req.file.buffer.toString('base64'),
-                type:req.file.mimetype
-            }
+            image: req.body.image
         })
+        
         const savedProduct = await newProduct.save()
         
         res.status(201).json({
             msg: "New Product created",
             product: savedProduct
         })
-    }catch(err){
+    } catch(err) {
         console.log(err)
-        res.status(500).json({err :"Internal server error"})
+        res.status(500).json({err: "Internal server error"})
     }
 })
-app.get('/product',async(req, res)=>{
-    const find= await addProduct.find()
+
+// Fixed search endpoint
+app.get('/products', async (req, res) => {
+    const searched = req.query.query; // Match the name attribute from the form
+    
+    try {
+        if (!searched) {
+            return res.redirect('/'); // Redirect to home if no search query
+        }
+        
+        const output = await addProduct.findOne({productname: searched})
+        
+        if(!output) {
+            return res.status(404).json({ found: false, msg: "No product found" });
+        }
+        
+        res.json({ found: true, product: output });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ msg: "Internal server error" });
+    }
+});
+
+// Keep original /search endpoint with fixed logic
+app.get('/search', async (req, res) => {
+    const searched = req.query.q;
+    
+    try {
+        const output = await addProduct.findOne({productname: searched})
+        
+        if(!output) {
+            return res.json({ found: false, msg: "No product found" });
+        }
+        
+        res.json({ found: true, product: output });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ msg: "Internal server error" });
+    }
+});
+
+app.get('/product', async(req, res) => {
+    const find = await addProduct.find()
     res.json(find)
 })
-app.get('/addproduct', (req, res)=>{
-    res.sendFile(path.join(__dirname,'../frontend','index.html'))
+
+app.get('/addproduct', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'index.html'))
 })
 
-app.listen(3000)
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
+})
