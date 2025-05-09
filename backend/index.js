@@ -2,6 +2,7 @@ const express = require('express')
 const { checkAddProduct } = require('./type')
 const { addProduct } = require('./db')
 const app = express()
+const path = require('path');
 
 //File storing middleware base64
 const multer = require('multer')
@@ -9,14 +10,14 @@ const storage = multer.memoryStorage();
 const upload = multer({storage:storage})
 
 app.use(express.json())
-
+app.use(express.static(path.join(__dirname, '../frontend')));
 app.post('/addproduct',upload.single('image'),async (req, res)=>{
     const parsed = checkAddProduct.safeParse(req.body);
 
     if(!parsed.success){
         return res.status(400).json({
             msg:"Invalid Inputs!!",
-            errors: parsed.error.erros
+            errors: parsed.error.errors
         })
     }
     try{
@@ -28,7 +29,7 @@ app.post('/addproduct',upload.single('image'),async (req, res)=>{
             quantity: req.body.quantity,
             status: req.body.status,
             image:{
-                data:req.file.buffer,
+                data:req.file.buffer.toString('base64'),
                 type:req.file.mimetype
             }
         })
@@ -43,4 +44,12 @@ app.post('/addproduct',upload.single('image'),async (req, res)=>{
         res.status(500).json({err :"Internal server error"})
     }
 })
+app.get('/product',async(req, res)=>{
+    const find= await addProduct.find()
+    res.json(find)
+})
+app.get('/addproduct', (req, res)=>{
+    res.sendFile(path.join(__dirname,'../frontend','index.html'))
+})
+
 app.listen(3000)
