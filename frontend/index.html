@@ -23,8 +23,8 @@
       <div class="search-cart">
         <!-- FIXED: Changed to inline JavaScript event handler and removed form action -->
         <form id="search-form" onsubmit="searchProduct(event)">
-          <input type="text" id="search-input" name="query" placeholder="Search products..." />
-          <button type="submit">Search</button>
+          <input type="text"class='search-input' id="search-input" name="query" placeholder="Search products..." />
+          <button class =''type="submit">Search</button>
         </form>
         <div class="cart-icon">
           🛒
@@ -32,7 +32,6 @@
       </div>
     </div>
   </header>
-  <!-- FIXED: Added dedicated search results container -->
   
   <!-- Hero Section -->
   <section class="hero">
@@ -49,19 +48,19 @@
       <h2 class="section-title">Shop by Category</h2>
       <div class="category-grid">
         <div class="category-card">
-          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=2583&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Electronics" class="category-image">
+          <img src="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Home & Garden" class="category-image">
           <div class="category-name">Electronics</div>
         </div>
         <div class="category-card">
-          <img src="https://images.unsplash.com/photo-1618483117619-7baef2anexion0db1f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fashion" class="category-image">
+          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=2583&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fashion" class="category-image">
           <div class="category-name">Fashion</div>
         </div>
         <div class="category-card">
-          <img src="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Home & Garden" class="category-image">
+          <img src="https://plus.unsplash.com/premium_photo-1678836292816-fdf0ac484cf1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG9tZSUyMGFuZCUyMGdhcmRlbnxlbnwwfHwwfHx8MA%3D%3D" alt="Electronics" class="category-image">
           <div class="category-name">Home & Garden</div>
         </div>
         <div class="category-card">
-          <img src="https://images.unsplash.com/photo-1540491688060-aa710a9f9d33?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sports" class="category-image">
+          <img src="https://plus.unsplash.com/premium_photo-1679690884144-1f43b8f3bf41?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sports" class="category-image">
           <div class="category-name">Sports</div>
         </div>
       </div>
@@ -207,15 +206,15 @@
     document.querySelector('.add-product-form').addEventListener('submit', sendData);
       function sendData(e) {
       e.preventDefault(); 
-const payload = {
-  productname: document.getElementById('productName').value,
-  price: document.getElementById('productPrice').value,
-  category: document.getElementById('productCategory').value,
-  description: document.getElementById('productDescription').value,
-  quantity: document.getElementById('productQuantity').value,
-  status: document.getElementById('productStatus').value,
-  image: document.getElementById('img').value
-};
+      const payload = {
+    productname: document.getElementById('productName').value,
+    price: document.getElementById('productPrice').value,
+    category: document.getElementById('productCategory').value,
+    description: document.getElementById('productDescription').value,
+    quantity: document.getElementById('productQuantity').value,
+    status: document.getElementById('productStatus').value,
+    image: document.getElementById('img').value
+    };
 
 
   axios.post('http://localhost:3000/addproduct', payload)
@@ -223,6 +222,7 @@ const payload = {
     
     .catch(error => console.error(error));
 }
+
 
 function addProductToDOM(product) {
   console.log("Adding product:", product); 
@@ -244,7 +244,7 @@ function addProductToDOM(product) {
         <div class="product-price">$${product.price}</div>
         <p class="product-description">${product.description}</p>
         <div class="product-actions">
-          <a href="#" class="add-to-cart">Add to Cart</a>
+          <button onclick="viewId('${product._id}')"class="add-to-cart">Details</button>
           <button class="wishlist-button">❤</button>
         </div>
       </div>
@@ -252,6 +252,9 @@ function addProductToDOM(product) {
   }
   
   container.appendChild(div);
+}
+function viewId(id){
+  window.location.href =`product.html?id=${id}`
 }
 window.onload = async () => {
   try {
@@ -274,6 +277,7 @@ window.onload = async () => {
       msgDiv.innerHTML = `<p>Last product you added: <strong>${product.productname}</strong> ($${product.price})</p>`;
       document.body.prepend(msgDiv);
     }
+    
   }
    catch (err) {
     console.error("Failed to load products:", err);
@@ -326,6 +330,8 @@ async function searchProduct(e) {
     resultDiv.innerHTML = '<p>Error occurred while searching for products. Please try again later.</p>';
   }
 }
+ const last = JSON.parse(localStorage.getItem('LastViewedProduct'));
+        console.log(last);
 </script>
 </body>
 </html>

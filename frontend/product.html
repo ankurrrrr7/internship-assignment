@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div id="product-detail"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+      const params = new URLSearchParams(window.location.search)
+      const id = params.get('id');
+
+      axios.get(`http://localhost:3000/product/${id}`)
+      .then(res=>{
+        const p = res.data
+        localStorage.setItem('LastViewedProduct',JSON.stringify(p))
+        document.getElementById('product-detail').innerHTML = `
+          <h1>${p.productname}</h1>
+          <img src="${p.image}" alt="${p.name}" width="200">
+          <p>${p.description}</p>
+          <p>Price: $${p.price}</p>
+        `;
+      })
+  </script>
+</body>
+</html>
