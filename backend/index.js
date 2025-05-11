@@ -40,27 +40,7 @@ app.post('/addproduct', async (req, res) => {
     }
 })
 
-// Fixed search endpoint
-app.get('/products', async (req, res) => {
-    const searched = req.query.query; // Match the name attribute from the form
-    
-    try {
-        if (!searched) {
-            return res.redirect('/'); // Redirect to home if no search query
-        }
-        
-        const output = await addProduct.findOne({productname: searched})
-        
-        if(!output) {
-            return res.status(404).json({ found: false, msg: "No product found" });
-        }
-        
-        res.json({ found: true, product: output });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ msg: "Internal server error" });
-    }
-});
+
 
 
 app.get('/search', async (req, res) => {
@@ -84,7 +64,10 @@ app.get('/product', async(req, res) => {
     const find = await addProduct.find()
     res.json(find)
 })
-
+app.get('/product/:id', async(req, res)=>{
+    const product = await addProduct.findById(req.params.id);
+    res.json(product)
+})
 app.get('/addproduct', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend', 'index.html'))
 })
